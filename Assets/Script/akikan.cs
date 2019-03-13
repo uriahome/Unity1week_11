@@ -12,10 +12,13 @@ public class akikan : MonoBehaviour
     public Vector2 MovePower;
     public float MovePower_X;
     public float MovePower_Y;
+
+    public GameObject ScoreObj;
+    public ScoreText Score_Text;
     // Start is called before the first frame update
     void Start()
     {
-        
+        Score_Text = ScoreObj.GetComponent<ScoreText>();
     }
 
     // Update is called once per frame
@@ -38,7 +41,7 @@ public class akikan : MonoBehaviour
         MovePower_X = Mytransform.transform.position.x - Hittransform.transform.position.x;//x座標の差をとる
         MovePower = Base;
         MovePower.x = MovePower_X;
-
+        Score_Text.Score_Add();
         this.rigid2d.AddForceAtPosition(MovePower * JumpPower, this.transform.position + Offset);
     }
 }
