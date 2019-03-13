@@ -8,6 +8,7 @@ public class HitPoint : MonoBehaviour
     public Vector3 Myposition;
     public BoxCollider2D Box;
     public SpriteRenderer Sprite;
+    public Transform HitPointTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +53,7 @@ public class HitPoint : MonoBehaviour
     {
         if(collision.gameObject.tag == "akikan")
         {
-            collision.gameObject.GetComponent<akikan>().Hit();
+            collision.gameObject.GetComponent<akikan>().Hit(HitPointTransform);
             Reset();
         }
     }
