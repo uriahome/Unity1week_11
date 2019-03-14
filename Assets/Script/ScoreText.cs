@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;//TextMeshProをいじるのに必要
+using UnityEngine.SceneManagement;//Sceneいじりよう
 
 public class ScoreText : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ScoreText : MonoBehaviour
     public TextMeshProUGUI Combo_Score_Text;
 
     public Animation anim;
+    public GameObject RetryButton;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,7 @@ public class ScoreText : MonoBehaviour
     void Score_Reset()
     {
         Score = 0;
+        RetryButton.SetActive(false);
     }
     public void Score_Add()
     {
@@ -34,6 +37,11 @@ public class ScoreText : MonoBehaviour
 
     public void GameOver()
     {
+        RetryButton.SetActive(true);
         naichilab.RankingLoader.Instance.SendScoreAndShowRanking(Score);
+    }
+    public void SceneLoad()
+    {
+        SceneManager.LoadScene("SampleScene");
     }
 }
