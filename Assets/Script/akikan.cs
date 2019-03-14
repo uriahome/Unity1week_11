@@ -15,16 +15,24 @@ public class akikan : MonoBehaviour
 
     public GameObject ScoreObj;
     public ScoreText Score_Text;
+    public float ScalePoint;
+
+    public int SpriteNum;
+    public Sprite[] MySprite;
+    public SpriteRenderer renderer;
     // Start is called before the first frame update
     void Start()
     {
+        SpriteNum = 0;
+        renderer = GetComponent<SpriteRenderer>();
         Score_Text = ScoreObj.GetComponent<ScoreText>();
+        ScalePoint = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        renderer.sprite = MySprite[SpriteNum];
     }
 
    /* void OnTriggerEnter2D(Collider2D collision)
@@ -37,11 +45,36 @@ public class akikan : MonoBehaviour
     }*/
     public void Hit( Transform Hittransform)
     {
+        if(SpriteNum == 0)
+        {
+            SpriteNum = 1;
+        }
         Debug.Log("Hit!!!!!!");
         MovePower_X = Mytransform.transform.position.x - Hittransform.transform.position.x;//x座標の差をとる
         MovePower = Base;
         MovePower.x = MovePower_X;
         Score_Text.Score_Add();
+        if(Score_Text.Score %5 == 0)
+        {
+            if(ScalePoint >= 0.10f)
+            {
+                ScalePoint -= 0.100f;
+            }
+            else {
+                SpriteNum = 2;
+                ScalePoint = 0;
+            }
+        }
+        this.transform.localScale = new Vector3(1.0f + ScalePoint, 1.0f + ScalePoint, 1.0f);
         this.rigid2d.AddForceAtPosition(MovePower * JumpPower, this.transform.position + Offset);
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.tag == "Bottom")
+        {
+            Score_Text.GameOver();
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -31,4 +31,9 @@ public class ScoreText : MonoBehaviour
         Score++;
         anim.Play();
     }
+
+    public void GameOver()
+    {
+        naichilab.RankingLoader.Instance.SendScoreAndShowRanking(Score);
+    }
 }
