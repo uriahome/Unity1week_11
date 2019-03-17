@@ -45,6 +45,7 @@ public class akikan : MonoBehaviour
     }*/
     public void Hit( Transform Hittransform)
     {
+        GetComponent<AudioSource>().Play();//音を再生
         if(SpriteNum == 0)
         {
             SpriteNum = 1;

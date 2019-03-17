@@ -55,6 +55,8 @@ public class HitPoint : MonoBehaviour
         {
             collision.gameObject.GetComponent<akikan>().Hit(HitPointTransform);
             Reset();
+
         }
+
     }
 }
