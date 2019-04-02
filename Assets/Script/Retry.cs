@@ -5,10 +5,13 @@ using UnityEngine.SceneManagement;//Sceneいじりよう
 
 public class Retry : MonoBehaviour
 {
+    public GameObject ScoreM;
+    public ScoreText ScoreText;
     // Start is called before the first frame update
     void Start()
     {
-        
+        ScoreM = GameObject.Find("Canvas/ScoreText");
+        ScoreText = ScoreM.GetComponent<ScoreText>();
     }
 
     // Update is called once per frame
@@ -20,5 +23,9 @@ public class Retry : MonoBehaviour
     public void SceneLoad()
     {
         SceneManager.LoadScene("SampleScene");
+    }
+    public void Tweet()
+    {
+        naichilab.UnityRoomTweet.Tweet("akikanhaziki", "アキカンハジキで"+ScoreText.Score+"コンボしました！", "unityroom");
     }
 }
